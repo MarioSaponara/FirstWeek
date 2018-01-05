@@ -52,7 +52,22 @@ public class CompatibilityView implements View {
                 gomme.forEach(gomma -> System.out.println(gomma));
                 System.out.println("Scegli il codice del gomma per assegnarli una compatibilità:");
                 Integer codegomma = Integer.parseInt(getInput());
-                compatibilityService.insertCompatibility(new Compatibility(codevehicle, codegomma));
+                Compatibility newcompatibility=new Compatibility(codevehicle, codegomma);
+                List<Compatibility> allcompatibility = compatibilityService.getAllCompatibility();
+                boolean trovato=false;
+                if (!allcompatibility.isEmpty()) {
+                    for (Compatibility compatibility : allcompatibility) {
+                        if (compatibility.equals(newcompatibility)){
+                            trovato=true;
+                        }
+                    }
+                }
+                if(allcompatibility.isEmpty() || !trovato) {
+                    compatibilityService.insertCompatibility(newcompatibility);
+                    System.out.println("Compatibilità inserita");
+                }
+                else
+                    System.out.println("Compatibilità già DB");
         }
     }
 

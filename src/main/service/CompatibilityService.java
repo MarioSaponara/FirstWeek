@@ -13,6 +13,10 @@ public class CompatibilityService {
         this.compatibilityDAO = new CompatibilityDAO();
     }
 
+    public List<Compatibility> getAllCompatibility () {
+        return this.compatibilityDAO.getAllCompatibility();
+    }
+
     public boolean insertCompatibility (Compatibility compatibility) {
         return this.compatibilityDAO.insertCompatibility(compatibility);
     }

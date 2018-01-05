@@ -138,8 +138,7 @@ public class Gomma {
         if (manufacturer != null ? !manufacturer.equals(gomma.manufacturer) : gomma.manufacturer != null) return false;
         if (speed != null ? !speed.equals(gomma.speed) : gomma.speed != null) return false;
         if (season != null ? !season.equals(gomma.season) : gomma.season != null) return false;
-        if (typevehicle != null ? !typevehicle.equals(gomma.typevehicle) : gomma.typevehicle != null) return false;
-        return quantity != null ? quantity.equals(gomma.quantity) : gomma.quantity == null;
+        return typevehicle != null ? typevehicle.equals(gomma.typevehicle) : gomma.typevehicle == null;
     }
 
     @Override
@@ -161,24 +160,23 @@ public class Gomma {
         result = 31 * result + (speed != null ? speed.hashCode() : 0);
         result = 31 * result + (season != null ? season.hashCode() : 0);
         result = 31 * result + (typevehicle != null ? typevehicle.hashCode() : 0);
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Gomma:" +
-                "\n Codice gomma = " + id_gomme +
-                "\n Modello = " + model +
-                "\n Produttore = " + manufacturer +
-                "\n Prezzo = " + price +
-                "\n Larghezza = " + width +
-                "\n Altezza = " + height +
-                "\n Diametro = " + diameter +
-                "\n Carico = " + weight +
-                "\n Velocità = " + speed +
-                "\n Stagione = " + season +
-                "\n Tipo veicolo = " + typevehicle +
-                "\n Quantità = " + quantity;
+        return "GOMMA:" +
+                "\nCodice gomma = " + id_gomme +
+                "\nModello = " + model +
+                "\nProduttore = " + manufacturer +
+                "\nPrezzo = " + price +
+                "\nLarghezza = " + width +
+                "\nAltezza = " + height +
+                "\nDiametro = " + diameter +
+                "\nCarico = " + weight +
+                "\nVelocità = " + speed +
+                "\nStagione = " + season +
+                "\nTipo veicolo = " + typevehicle +
+                "\nQuantità = " + quantity;
     }
 }

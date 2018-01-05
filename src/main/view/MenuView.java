@@ -66,60 +66,81 @@ public class MenuView implements View {
         switch(role)
         {
             case "admin":
-                if (choice < 1 || choice > 7) {
-                    Request request = new Request();
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Login", "doControl", request);
-                }
-                else if (choice == 3){
-                    Request request = new Request();
-                    request.put("choice", choice);
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("User", "doControl", request);
-                }
-                else if ((choice == 4) || (choice == 5)){
-                    Request request = new Request();
-                    request.put("choice", choice);
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Vehicle", "doControl", request);
-                }
-                else if (choice == 6){
-                    Request request = new Request();
-                    request.put("choice", choice);
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Compatibility", "doControl", request);
-                }
-                else if (choice == 7)
-                    MainDispatcher.getInstance().callAction("Home", "doControl", null);
-                else{
-                    Request request = new Request();
-                    request.put("choice", choice);
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+                switch(choice)
+                {
+                    case 1:
+                    case 2:{
+                        Request request = new Request();
+                        request.put("choice", choice);
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+                    }
+                        break;
+                    case 3:{
+                        Request request = new Request();
+                        request.put("choice", choice);
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("User", "doControl", request);
+                    }
+                        break;
+                    case 4:
+                    case 5:{
+                        Request request = new Request();
+                        request.put("choice", choice);
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Vehicle", "doControl", request);
+                    }
+                        break;
+                    case 6: {
+                        Request request = new Request();
+                        request.put("choice", choice);
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Compatibility", "doControl", request);
+                    }
+                        break;
+                    case 7:{
+                        MainDispatcher.getInstance().callAction("Home", "doControl", null);
+                    }
+                        break;
+                    default:{
+                        Request request = new Request();
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Login", "doControl", request);
+                    }
                 }
                 break;
 
             case "user":
-                if (choice < 1 || choice > 5) {
-                    Request request = new Request();
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Login", "doControl", request);
+                switch(choice)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4: {
+                        Request request = new Request();
+                        request.put("choice", choice);
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
+                    }
+                    break;
+                    case 5:{
+                        MainDispatcher.getInstance().callAction("Home", "doControl", null);
+                    }
+                    break;
+                    default:{
+                        Request request = new Request();
+                        request.put("role", role);
+                        request.put("nome", nome);
+                        MainDispatcher.getInstance().callAction("Login", "doControl", request);
+                    }
                 }
-                else if (choice == 5)
-                    MainDispatcher.getInstance().callAction("Home", "doControl", null);
-                else {
-                    Request request = new Request();
-                    request.put("choice", choice);
-                    request.put("role", role);
-                    request.put("nome", nome);
-                    MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
-                }
+                break;
         }
     }
 

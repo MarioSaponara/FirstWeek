@@ -204,21 +204,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "Utente:" +
-                "\n Username = " + username +
-                "\n Password = " + password +
-                "\n Nome = " + firstname +
-                "\n Cognome = " + lastname +
-                "\n Data di nascita = " + dateofbirth +
-                "\n CF = " + fiscalcode +
-                "\n Regione Sociale = " + businessname +
-                "\n P.IVA = " + vat +
-                "\n Comune = " + municipality +
-                "\n CAP = " + post +
-                "\n Provincia = " + city +
-                "\n Indirizzo = " + address +
-                "\n Telefono = " + telephone +
-                "\n Fax = " + fax +
-                "\n Ruolo = " + role;
+        return "UTENTE:" +
+                "\nUsername = " + username +
+                "\nPassword = " + password +
+                "\nNome = " + firstname +
+                "\nCognome = " + lastname +
+                "\nData di nascita = " + dateofbirth +
+                "\nCF = " + fiscalcode +
+                "\nRegione Sociale = " + businessname +
+                "\nP.IVA = " + vat +
+                "\nComune = " + municipality +
+                "\nCAP = " + post +
+                "\nProvincia = " + city +
+                "\nIndirizzo = " + address +
+                "\nTelefono = " + telephone +
+                "\nFax = " + fax +
+                "\nRuolo = " + role;
     }
 }

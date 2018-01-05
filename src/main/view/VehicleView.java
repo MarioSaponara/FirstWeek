@@ -30,7 +30,7 @@ public class VehicleView implements View {
     @Override
     public void showOptions() {
         switch (mode) {
-            case "all":
+            case "all": {
                 List<Vehicle> vehicles = vehicleService.getAllVehicles();
                 System.out.println("----- Veicoli registrati -----");
                 System.out.println();
@@ -38,8 +38,9 @@ public class VehicleView implements View {
                     vehicles.forEach(vehicle -> System.out.println(vehicle));
                 else
                     System.out.println("Al momento non sono presenti auto registrate");
+            }
                 break;
-            case "insert":
+            case "insert": {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci veicoli:");
                 System.out.println("Marca:");
@@ -52,7 +53,23 @@ public class VehicleView implements View {
                 String version = getInput();
                 System.out.println("Cilindrata:");
                 String capacity = getInput();
-                vehicleService.insertVehicle(new Vehicle(null, brand, model, fuel, version, capacity));
+                Vehicle newvehicle=new Vehicle(null, brand, model, fuel, version, capacity);
+                List<Vehicle> vehicles = vehicleService.getAllVehicles();
+                boolean trovato=false;
+                if (!vehicles.isEmpty()) {
+                    for (Vehicle vehicle : vehicles) {
+                        if (vehicle.equals(newvehicle)){
+                            trovato=true;
+                        }
+                    }
+                }
+                if(vehicles.isEmpty() || !trovato) {
+                    vehicleService.insertVehicle(newvehicle);
+                    System.out.println("Veicolo inserito nel DB");
+                }
+                else
+                    System.out.println("Veicolo già presente nel DB");
+            }
         }
     }
 

@@ -33,18 +33,19 @@ public class GommaView implements View {
     @Override
     public void showOptions() {
         switch (mode) {
-            case "all":
+            case "all": {
                 List<Gomma> gomme = gommaService.getAllGomme();
                 System.out.println("----- Gomme disponibili -----");
                 System.out.println();
                 if (!gomme.isEmpty())
-                    gomme.forEach(gomma -> System.out.println(gomma));
+                    gomme.forEach(gomma -> System.out.println(gomma + "\n"));
                 else
                     System.out.println("Al momento non sono presenti gomme disponibili");
+            }
                 break;
-            case "insert":
+            case "insert": {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Inserisci i dati della nuova gomma:");
+                System.out.println("Inserisci i dati della nuova gomma");
                 System.out.println("Modello:");
                 String model = getInput();
                 System.out.println("Produttore:");
@@ -67,13 +68,29 @@ public class GommaView implements View {
                 String typevehicle = getInput();
                 System.out.println("Numeri pezzi:");
                 Integer quantity = Integer.parseInt(getInput());
-                gommaService.insertGomma(new Gomma (null, model, manufacturer, price, width, height, diameter, weight, speed, season, typevehicle, quantity));
+                Gomma newgomma=new Gomma(null, model, manufacturer, price, width, height, diameter, weight, speed, season, typevehicle, quantity);
+                List<Gomma> gomme = gommaService.getAllGomme();
+                boolean trovato=false;
+                if (!gomme.isEmpty()) {
+                    for (Gomma gomma : gomme) {
+                        if (gomma.equals(newgomma)){
+                            trovato=true;
+                        }
+                    }
+                }
+                if(gomme.isEmpty() || !trovato) {
+                    gommaService.insertGomma(newgomma);
+                    System.out.println("Gomma inserita nel DB");
+                }
+                else
+                    System.out.println("Gomma già presente nel DB");
+            }
                 break;
-            case "allGommeForBrandAndTypeVehicle":
+            case "allGommeForBrandAndTypeVehicle": {
                 System.out.println("Inserisci il tuo tipo di veicolo(auto-commerciale-moto):");
                 String type = getInput();
                 List<String> brands = gommaService.getAllManufacturerForType(type);
-                if (!brands.isEmpty()){
+                if (!brands.isEmpty()) {
                     System.out.println("-----Brand disponibili--------");
                     brands.forEach(String -> System.out.println(String));
                     System.out.println("-----Scegli il brand--------");
@@ -83,17 +100,18 @@ public class GommaView implements View {
                         gommeBrand.forEach(gomma -> System.out.println(gomma));
                     else
                         System.out.println("Hai sbagliato a inserire il nome del brand");
-                }else{
-                    if(!(type.equals("auto") || type.equals("commerciale") || type.equals("moto")))
+                } else {
+                    if (!(type.equals("auto") || type.equals("commerciale") || type.equals("moto")))
                         System.out.println("Tipo di veicolo inserito non correto");
                     else
-                        System.out.println("Per il tipo di veicolo "+type+" non sono presenti gomme");
+                        System.out.println("Per il tipo di veicolo " + type + " non sono presenti gomme");
                 }
+            }
                 break;
-            case "allGommeForDimension":
+            case "allGommeForDimension": {
                 System.out.println("Inserisci il tuo tipo di veicolo(auto-commerciale-moto):");
                 String type2 = getInput();
-                if(type2.equals("auto") || type2.equals("commerciale") || type2.equals("moto")) {
+                if (type2.equals("auto") || type2.equals("commerciale") || type2.equals("moto")) {
                     System.out.println("Inserisci le caratteristiche del tuo veicolo");
                     System.out.println("Larghezza:");
                     double width2 = Double.parseDouble(getInput());
@@ -116,10 +134,11 @@ public class GommaView implements View {
                         gommeForDimension.forEach(gomma -> System.out.println(gomma));
                     else
                         System.out.println("Non sono presenti gomme con i dati inseriti");
-                }else
+                } else
                     System.out.println("Tipo di veicolo inserito non correto");
+            }
                 break;
-            case "allGommeForVehicle":
+            case "allGommeForVehicle": {
                 System.out.println("Inserisci le caratteristiche della tua auto");
                 System.out.println("Marca:");
                 String brand_1 = getInput();
@@ -131,17 +150,17 @@ public class GommaView implements View {
                 String version_1 = getInput();
                 System.out.println("Cilindrata:");
                 String capacity_1 = getInput();
-                Integer index=vehicleService.getVehicle(brand_1, model_1, fuel_1, version_1, capacity_1);
-                if (!(index== null)) {
+                Integer index = vehicleService.getVehicle(brand_1, model_1, fuel_1, version_1, capacity_1);
+                if (!(index == null)) {
                     List<Gomma> gommeForVehicle = gommaService.allGommaForVehicle(index);
                     if (!gommeForVehicle.isEmpty())
                         gommeForVehicle.forEach(gomma -> System.out.println(gomma));
                     else
                         System.out.println("Non sono presenti gomme compatibili per questo tipo di macchina");
-                }
-                else{
+                } else {
                     System.out.println("ATTENZIONE-L'auto inserita non è registrata");
                 }
+            }
         }
     }
 

@@ -49,8 +49,8 @@ create table tire.vehicle(
 create table tire.compatibility(
 	id_vehicle int(20),
 	id_gomme int(20),
-	foreign key (id_vehicle) references contrader.vehicle(id_vehicle),
-	foreign key (id_gomme) references contrader.gomme(id_gomme)
+	foreign key (id_vehicle) references tire.vehicle(id_vehicle),
+	foreign key (id_gomme) references tire.gomme(id_gomme)
 );
 
 

@@ -29,13 +29,13 @@ public class UserView implements View {
         switch (mode) {
             case "all":
                 List<User> users = userService.getAllUsers();
-                System.out.println("----- Utenti registrati -----");
+                System.out.println("-----UTENTI REGISTRATI-----");
                 System.out.println();
                 users.forEach(user -> System.out.println(user));
                 break;
             case "insert":
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Registrati:");
+                System.out.println("---INSERISCI DATI---");
                 System.out.println("Username:");
                 String username = getInput();
                 System.out.println("Password:");
@@ -81,7 +81,7 @@ public class UserView implements View {
         }else if (mode.equals("all")) {
             Request request = new Request();
             request.put("role", role);
-            //request.put("nome", nome);
+            request.put("nome", nome);
             MainDispatcher.getInstance().callAction("Login", "doControl", request);
         }
     }

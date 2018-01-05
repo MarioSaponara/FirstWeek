@@ -3,17 +3,35 @@ package main.dao;
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
 import main.model.Compatibility;
-import main.model.Gomma;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompatibilityDAO {
 
+    private final String QUERY_ALL = "select * from compatibility";
     private final String QUERY_INSERT = "insert into compatibility (id_vehicle, id_gomme) values (?,?)";
 
     public CompatibilityDAO() {
+    }
+
+    public List<Compatibility> getAllCompatibility() {
+        List<Compatibility> compatibility = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
+            while (resultSet.next()) {
+                Integer id_vehicle=resultSet.getInt("id_vehicle");
+                Integer id_gomme=resultSet.getInt("id_gomme");
+                compatibility.add(new Compatibility(id_vehicle, id_gomme));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return compatibility;
     }
 
     public boolean insertCompatibility(Compatibility compatibility) {
