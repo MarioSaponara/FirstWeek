@@ -20,6 +20,26 @@ public class GommaService {
     public boolean insertGomma (Gomma gomma) {
         return this.gommaDAO.insertGomma(gomma);
     }
+
+    public List<String> getAllManufacturerForType (String type) {
+        return this.gommaDAO.getAllManufacturerForType(type);
+    }
+
+    public List<Gomma> getAllGommeForManufacturer (String brand, String type) {
+        return this.gommaDAO.getAllGommeForManufacturer(brand, type);
+    }
+
+    public List<Gomma> getAllGommeForAuto () {
+        return this.gommaDAO.getAllGommeForAuto();
+    }
+
+    public List<Gomma> allGommaForDimension (String type, double width, double height, double diameter, String season, double weight, String speed) {
+        return this.gommaDAO.allGommaForDimension (type, width, height, diameter, season, weight, speed);
+    }
+
+    public List<Gomma> allGommaForVehicle(Integer index) {
+        return this.gommaDAO.allGommaForVehicle (index);
+    }
 }
 
 

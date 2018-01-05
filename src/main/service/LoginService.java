@@ -1,6 +1,7 @@
 package main.service;
 
 import main.dao.LoginDAO;
+import java.util.List;
 
 public class LoginService {
 
@@ -10,7 +11,7 @@ public class LoginService {
         this.loginDAO = new LoginDAO();
     }
 
-    public boolean login (String username, String password) {
+    public List<String> login (String username, String password) {
         return this.loginDAO.login(username, password);
     }
 }

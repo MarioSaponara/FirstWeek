@@ -8,42 +8,45 @@ import java.util.Scanner;
 
 public class HomeView implements View {
 
-    private int choice;
-
+    int typeaccess;
+    @Override
     public void showResults(Request request) {
 
     }
 
-
+    @Override
     public void showOptions() {
-        System.out.println("Benvenuto in ContraderFramework");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("-------MENU-------");
-        System.out.println("");
-        System.out.println("1) Inserisci gomma");
-        System.out.println("2) Visualizza gomme disponibili");
-        System.out.println("3) Logout");
-        this.choice = Integer.parseInt(getInput());
+        System.out.println("-----HOME-PAGE----");
+        System.out.println("1-----ACCEDI------");
+        System.out.println("2----REGISTRATI---");
+        boolean flag;
+        do {
+            flag=false;
+            try{
+                typeaccess = Integer.parseInt(getInput());
+            }
+            catch (NumberFormatException e){
+                flag=true;
+                MainDispatcher.getInstance().callView("Home",null);
+            }
+        }while(flag);
     }
 
-    public void submit() {
-        if (choice < 1 || choice > 3)
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 3)
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
-        else {
-            Request request = new Request();
-            request.put("choice", choice);
-            MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
-        }
-    }
-
-
-    public String getInput() {
+    @Override
+    public String getInput () {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
-
+    @Override
+    public void submit() {
+        Request request = new Request();
+        if((typeaccess<1) || (typeaccess>2)){
+            MainDispatcher.getInstance().callView("Home",null);
+        }else if ((typeaccess==1) || (typeaccess==2)){
+            request.put("choice",typeaccess);
+            request.put("role",null);
+            MainDispatcher.getInstance().callAction("User", "doControl", request);
+        }
+    }
 }
