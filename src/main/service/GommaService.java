@@ -40,6 +40,14 @@ public class GommaService {
     public List<Gomma> allGommaForVehicle(Integer index) {
         return this.gommaDAO.allGommaForVehicle (index);
     }
+
+    public boolean updateQuantity (Integer newquantity, Integer codegomma) {
+        return this.gommaDAO.updateQuantity(newquantity, codegomma);
+    }
+
+    public boolean removeGomma (Integer codegomma) {
+        return this.gommaDAO.removeGomma(codegomma);
+    }
 }
 
 

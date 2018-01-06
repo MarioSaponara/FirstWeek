@@ -2,7 +2,9 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Gomma;
 import main.model.Vehicle;
+import main.service.CompatibilityService;
 import main.service.VehicleService;
 
 import java.util.List;
@@ -11,12 +13,14 @@ import java.util.Scanner;
 public class VehicleView implements View {
 
     private VehicleService vehicleService;
+    private CompatibilityService compatibilityService;
     private String mode;
     private String role;
     private String nome;
 
     public VehicleView () {
         this.vehicleService = new VehicleService();
+        this.compatibilityService = new CompatibilityService();
         this.mode = "all";
     }
 
@@ -69,6 +73,18 @@ public class VehicleView implements View {
                 }
                 else
                     System.out.println("Veicolo già presente nel DB");
+            }
+                break;
+            case "remove":{
+                List<Vehicle> vehicles = vehicleService.getAllVehicles();
+                System.out.println("----- Veicoli disponibili -----");
+                System.out.println();
+                if (!vehicles.isEmpty())
+                    vehicles.forEach(vehicle -> System.out.println(vehicle + "\n"));
+                System.out.println("Inserisci codice veicolo da rimuovere:");
+                Integer codevehicle = Integer.parseInt(getInput());
+                compatibilityService.removeCompatibility(codevehicle, 0);
+                vehicleService.removeVehicle(codevehicle);
             }
         }
     }

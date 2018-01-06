@@ -28,11 +28,14 @@ public class MenuView implements View {
                 System.out.println("");
                 System.out.println("1) Inserisci nuova gomma");
                 System.out.println("2) Visualizza tutte le gomme");
-                System.out.println("3) Visualizza tutti gli utenti");
-                System.out.println("4) Inserisci nuovo veicolo");
-                System.out.println("5) Visualizza tutti i veicoli");
-                System.out.println("6) Inserisci compatibilità");
-                System.out.println("7) Logout");
+                System.out.println("3) Aggiorna quantità gomma");
+                System.out.println("4) Rimuovi gomma");
+                System.out.println("5) Visualizza tutti gli utenti");
+                System.out.println("6) Inserisci nuovo veicolo");
+                System.out.println("7) Visualizza tutti i veicoli");
+                System.out.println("8) Rimuovi veicolo");
+                System.out.println("9) Inserisci compatibilità");
+                System.out.println("10) Logout");
                 break;
             case "user":
                 System.out.println(nome+" Benvenuto in ContraderFramework");
@@ -69,7 +72,9 @@ public class MenuView implements View {
                 switch(choice)
                 {
                     case 1:
-                    case 2:{
+                    case 2:
+                    case 3:
+                    case 4:{
                         Request request = new Request();
                         request.put("choice", choice);
                         request.put("role", role);
@@ -77,7 +82,7 @@ public class MenuView implements View {
                         MainDispatcher.getInstance().callAction("Gomma", "doControl", request);
                     }
                         break;
-                    case 3:{
+                    case 5:{
                         Request request = new Request();
                         request.put("choice", choice);
                         request.put("role", role);
@@ -85,8 +90,9 @@ public class MenuView implements View {
                         MainDispatcher.getInstance().callAction("User", "doControl", request);
                     }
                         break;
-                    case 4:
-                    case 5:{
+                    case 6:
+                    case 7:
+                    case 8:{
                         Request request = new Request();
                         request.put("choice", choice);
                         request.put("role", role);
@@ -94,7 +100,7 @@ public class MenuView implements View {
                         MainDispatcher.getInstance().callAction("Vehicle", "doControl", request);
                     }
                         break;
-                    case 6: {
+                    case 9: {
                         Request request = new Request();
                         request.put("choice", choice);
                         request.put("role", role);
@@ -102,7 +108,7 @@ public class MenuView implements View {
                         MainDispatcher.getInstance().callAction("Compatibility", "doControl", request);
                     }
                         break;
-                    case 7:{
+                    case 10:{
                         MainDispatcher.getInstance().callAction("Home", "doControl", null);
                     }
                         break;

@@ -20,4 +20,8 @@ public class CompatibilityService {
     public boolean insertCompatibility (Compatibility compatibility) {
         return this.compatibilityDAO.insertCompatibility(compatibility);
     }
+
+    public boolean removeCompatibility (Integer codevehicle, Integer codegomma) {
+        return this.compatibilityDAO.removeCompatibility(codevehicle, codegomma);
+    }
 }

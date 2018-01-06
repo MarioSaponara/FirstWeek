@@ -14,7 +14,7 @@ public class UserController implements Controller{
             case 2:
                 request.put("mode", "insert");
                 break;
-            case 3:
+            case 5:
                 request.put("mode", "all");
         }
 

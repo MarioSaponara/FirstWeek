@@ -12,6 +12,8 @@ public class GommaDAO {
 
     private final String QUERY_ALL = "select * from gomme";
     private final String QUERY_INSERT = "insert into gomme (id_gomme, model, manufacturer, price, width, height, diameter, weight, speed, season, typevehicle, quantity) values (NULL,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String QUERY_QUANTITY = "update gomme set quantity = ? where id_gomme=?";
+    private final String QUERY_REMOVE = "delete from gomme where id_gomme=?";
 
     public GommaDAO() {
     }
@@ -59,6 +61,35 @@ public class GommaDAO {
             preparedStatement.setString(9, gomma.getSeason());
             preparedStatement.setString(10, gomma.getTypevehicle());
             preparedStatement.setInt(11, gomma.getQuantity());
+            return preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+    }
+
+    public boolean updateQuantity(Integer newquantity, Integer codegomma) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_QUANTITY);
+            preparedStatement.setInt(1, newquantity);
+            preparedStatement.setInt(2, codegomma);
+
+            return preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+    }
+
+    public boolean removeGomma(Integer codegomma) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REMOVE);
+            preparedStatement.setInt(1, codegomma);
+
             return preparedStatement.execute();
         }
         catch (SQLException e) {

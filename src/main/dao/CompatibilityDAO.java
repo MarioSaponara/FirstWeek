@@ -12,6 +12,7 @@ public class CompatibilityDAO {
 
     private final String QUERY_ALL = "select * from compatibility";
     private final String QUERY_INSERT = "insert into compatibility (id_vehicle, id_gomme) values (?,?)";
+    private final String QUERY_REMOVE = "delete from compatibility where id_vehicle=? or id_gomme=?;";
 
     public CompatibilityDAO() {
     }
@@ -40,6 +41,19 @@ public class CompatibilityDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
             preparedStatement.setInt(1, compatibility.getId_vehicle());
             preparedStatement.setInt(2, compatibility.getId_gomme());
+            return preparedStatement.execute();
+        } catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+    }
+
+    public boolean removeCompatibility(Integer codevehicle, Integer codegomma) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REMOVE);
+            preparedStatement.setInt(1, codevehicle);
+            preparedStatement.setInt(2, codegomma);
             return preparedStatement.execute();
         } catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);

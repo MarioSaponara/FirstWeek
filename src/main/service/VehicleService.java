@@ -24,4 +24,8 @@ public class VehicleService {
     public Integer getVehicle (String brand, String model, String fuel, String version, String capacity) {
         return this.vehicleDAO.getVehicle(brand, model, fuel, version, capacity);
     }
+
+    public boolean removeVehicle (Integer codevehicle) {
+        return this.vehicleDAO.removeVehicle(codevehicle);
+    }
 }

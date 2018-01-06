@@ -12,6 +12,7 @@ public class VehicleDAO {
     private final String QUERY_ALL = "select * from vehicle";
     private final String QUERY_INSERT = "insert into vehicle (id_vehicle, brand, model, fuel, version, capacity) values (NULL,?,?,?,?,?)";
     private final String QUERY_WITH_PARAMETERS = "select id_vehicle from vehicle where brand=? and model=? and fuel=? and version=? and capacity=?";
+    private final String QUERY_REMOVE = "delete from vehicle where id_vehicle=?";
 
     public VehicleDAO() {
 
@@ -78,4 +79,15 @@ public class VehicleDAO {
         return id_vehicleR;
     }
 
+    public boolean removeVehicle(Integer codevehicle) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REMOVE);
+            preparedStatement.setInt(1, codevehicle);
+            return preparedStatement.execute();
+        } catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+    }
 }

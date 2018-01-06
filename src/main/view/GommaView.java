@@ -3,6 +3,7 @@ import main.MainDispatcher;
 import main.controller.Request;
 import main.model.Gomma;
 import main.dao.GommaDAO;
+import main.service.CompatibilityService;
 import main.service.GommaService;
 import main.service.VehicleService;
 
@@ -13,6 +14,7 @@ public class GommaView implements View {
 
     private GommaService gommaService;
     private VehicleService vehicleService;
+    private CompatibilityService compatibilityService;
     private String mode;
     private String role;
     private String nome;
@@ -20,6 +22,7 @@ public class GommaView implements View {
     public GommaView () {
         this.gommaService = new GommaService();
         this.vehicleService = new VehicleService();
+        this.compatibilityService = new CompatibilityService();
         this.mode = "all";
     }
 
@@ -84,6 +87,31 @@ public class GommaView implements View {
                 }
                 else
                     System.out.println("Gomma già presente nel DB");
+            }
+                break;
+            case "updatequantity":{
+                List<Gomma> gomme = gommaService.getAllGomme();
+                System.out.println("----- Gomme disponibili -----");
+                System.out.println();
+                if (!gomme.isEmpty())
+                    gomme.forEach(gomma -> System.out.println(gomma + "\n"));
+                System.out.println("Inserisci codice gomma da aggiornare:");
+                Integer codegomma = Integer.parseInt(getInput());
+                System.out.println("Inserisci nuovo valore quantità:");
+                Integer newquantity = Integer.parseInt(getInput());
+                gommaService.updateQuantity(newquantity,codegomma);
+            }
+                break;
+            case "remove":{
+                List<Gomma> gomme = gommaService.getAllGomme();
+                System.out.println("----- Gomme disponibili -----");
+                System.out.println();
+                if (!gomme.isEmpty())
+                    gomme.forEach(gomma -> System.out.println(gomma + "\n"));
+                System.out.println("Inserisci codice gomma da rimuovere:");
+                Integer codegomma = Integer.parseInt(getInput());
+                compatibilityService.removeCompatibility(0, codegomma);
+                gommaService.removeGomma(codegomma);
             }
                 break;
             case "allGommeForBrandAndTypeVehicle": {

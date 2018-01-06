@@ -17,6 +17,12 @@ public class GommaController implements Controller {
                     case 2:
                         request.put("mode", "all");
                         break;
+                    case 3:
+                        request.put("mode", "updatequantity");
+                        break;
+                    case 4:
+                        request.put("mode", "remove");
+                        break;
                 }
                 break;
             case "user":
