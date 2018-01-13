@@ -36,16 +36,16 @@ public class VehicleView implements View {
         switch (mode) {
             case "all": {
                 List<Vehicle> vehicles = vehicleService.getAllVehicles();
-                System.out.println("----- Veicoli registrati -----");
-                System.out.println();
-                if (!vehicles.isEmpty())
-                    vehicles.forEach(vehicle -> System.out.println(vehicle));
+                if (!vehicles.isEmpty()) {
+                    System.out.println("----- Veicoli registrati -----");
+                    System.out.println();
+                    vehicles.forEach(vehicle -> System.out.println(vehicle + "\n"));
+                }
                 else
                     System.out.println("Al momento non sono presenti auto registrate");
             }
                 break;
             case "insert": {
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci veicoli:");
                 System.out.println("Marca:");
                 String brand = getInput();
@@ -79,12 +79,14 @@ public class VehicleView implements View {
                 List<Vehicle> vehicles = vehicleService.getAllVehicles();
                 System.out.println("----- Veicoli disponibili -----");
                 System.out.println();
-                if (!vehicles.isEmpty())
+                if (!vehicles.isEmpty()) {
                     vehicles.forEach(vehicle -> System.out.println(vehicle + "\n"));
-                System.out.println("Inserisci codice veicolo da rimuovere:");
-                Integer codevehicle = Integer.parseInt(getInput());
-                compatibilityService.removeCompatibility(codevehicle, 0);
-                vehicleService.removeVehicle(codevehicle);
+                    System.out.println("Inserisci codice veicolo da rimuovere:");
+                    Integer codevehicle = Integer.parseInt(getInput());
+                    compatibilityService.removeCompatibility(codevehicle, 0);
+                    vehicleService.removeVehicle(codevehicle);
+                }else
+                    System.out.println("Al momento non sono presenti auto registrate");
             }
         }
     }

@@ -8,15 +8,14 @@ public class VehicleController implements Controller{
     public void doControl(Request request) {
         int choice = (int) request.get("choice");
         switch (choice) {
-            case 6:
+            case 7:
                 request.put("mode", "insert");
                 break;
-            case 7:
+            case 8:
                 request.put("mode", "all");
                 break;
-            case 8:
+            case 9:
                 request.put("mode", "remove");
-                break;
         }
         MainDispatcher.getInstance().callView("Vehicle", request);
     }

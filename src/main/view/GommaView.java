@@ -38,16 +38,15 @@ public class GommaView implements View {
         switch (mode) {
             case "all": {
                 List<Gomma> gomme = gommaService.getAllGomme();
-                System.out.println("----- Gomme disponibili -----");
-                System.out.println();
-                if (!gomme.isEmpty())
+                if (!gomme.isEmpty()) {
+                    System.out.println("----- Gomme disponibili -----");
+                    System.out.println();
                     gomme.forEach(gomma -> System.out.println(gomma + "\n"));
-                else
-                    System.out.println("Al momento non sono presenti gomme disponibili");
+                }else
+                    System.out.println("--Non sono presenti gomme disponibili--");
             }
                 break;
             case "insert": {
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci i dati della nuova gomma");
                 System.out.println("Modello:");
                 String model = getInput();
@@ -91,27 +90,31 @@ public class GommaView implements View {
                 break;
             case "updatequantity":{
                 List<Gomma> gomme = gommaService.getAllGomme();
-                System.out.println("----- Gomme disponibili -----");
-                System.out.println();
-                if (!gomme.isEmpty())
+                if (!gomme.isEmpty()) {
+                    System.out.println("----- Gomme disponibili -----");
+                    System.out.println();
                     gomme.forEach(gomma -> System.out.println(gomma + "\n"));
-                System.out.println("Inserisci codice gomma da aggiornare:");
-                Integer codegomma = Integer.parseInt(getInput());
-                System.out.println("Inserisci nuovo valore quantità:");
-                Integer newquantity = Integer.parseInt(getInput());
-                gommaService.updateQuantity(newquantity,codegomma);
+                    System.out.println("Inserisci codice gomma da aggiornare:");
+                    Integer codegomma = Integer.parseInt(getInput());
+                    System.out.println("Inserisci nuovo valore quantità:");
+                    Integer newquantity = Integer.parseInt(getInput());
+                    gommaService.updateQuantity(newquantity, codegomma);
+                } else
+                    System.out.println("--Non sono presenti gomme disponibili--");
             }
                 break;
             case "remove":{
                 List<Gomma> gomme = gommaService.getAllGomme();
-                System.out.println("----- Gomme disponibili -----");
-                System.out.println();
-                if (!gomme.isEmpty())
+                if (!gomme.isEmpty()){
+                    System.out.println("----- Gomme disponibili -----");
+                    System.out.println();
                     gomme.forEach(gomma -> System.out.println(gomma + "\n"));
-                System.out.println("Inserisci codice gomma da rimuovere:");
-                Integer codegomma = Integer.parseInt(getInput());
-                compatibilityService.removeCompatibility(0, codegomma);
-                gommaService.removeGomma(codegomma);
+                    System.out.println("Inserisci codice gomma da rimuovere:");
+                    Integer codegomma = Integer.parseInt(getInput());
+                    compatibilityService.removeCompatibility(0, codegomma);
+                    gommaService.removeGomma(codegomma);
+                }else
+                    System.out.println("--Non sono presenti gomme disponibili--");
             }
                 break;
             case "allGommeForBrandAndTypeVehicle": {

@@ -16,6 +16,7 @@ public class HomeView implements View {
 
     @Override
     public void showOptions() {
+        System.out.println("");
         System.out.println("-----HOME-PAGE----");
         System.out.println("1-----ACCEDI------");
         System.out.println("2----REGISTRATI---");

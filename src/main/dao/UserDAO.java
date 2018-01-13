@@ -12,6 +12,7 @@ public class UserDAO {
 
     private final String QUERY_ALL = "select * from users";
     private final String QUERY_INSERT = "insert into users (username, password, firstname, lastname, dateofbirth, fiscalcode, businessname, vat, municipality, post, city, address, telephone, fax, role) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String QUERY_REMOVE = "delete from users where username=?";
 
     public UserDAO() {
 
@@ -74,4 +75,19 @@ public class UserDAO {
         }
         return users;
     }
+
+    public boolean removeUser(String username) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY_REMOVE);
+            preparedStatement.setString(1, username);
+            return preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+    }
+
 }
+

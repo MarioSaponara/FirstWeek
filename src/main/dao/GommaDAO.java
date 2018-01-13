@@ -160,7 +160,7 @@ public class GommaDAO {
 
 
     public  List<String> getAllManufacturerForType(String type){
-        List<String> typeVehicle = new ArrayList<>();
+        List<String> manufacturers = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
         String query="select distinct manufacturer from gomme where typevehicle=\""+type+"\"";
 
@@ -169,13 +169,13 @@ public class GommaDAO {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String manufacturer = resultSet.getString("manufacturer");
-                typeVehicle.add(manufacturer);
+                manufacturers.add(manufacturer);
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return typeVehicle;
+        return manufacturers;
     }
 
     public List<Gomma> allGommaForDimension(String type, double width, double height, double diameter, String season, double weight, String speed) {

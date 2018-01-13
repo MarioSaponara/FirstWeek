@@ -20,4 +20,8 @@ public class UserService {
     public boolean insertUser (User user) {
         return this.userDAO.insertUser(user);
     }
+
+    public boolean removeUser (String username ) {
+        return this.userDAO.removeUser(username);
+    }
 }

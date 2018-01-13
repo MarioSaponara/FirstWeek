@@ -22,19 +22,20 @@ public class UserView implements View {
     public void showResults(Request request) {
         this.mode  = (String) request.get("mode");
         this.role = (String) request.get("role");
+        this.nome = (String) request.get("nome");
     }
 
     @Override
     public void showOptions() {
         switch (mode) {
-            case "all":
+            case "all": {
                 List<User> users = userService.getAllUsers();
                 System.out.println("-----UTENTI REGISTRATI-----");
                 System.out.println();
-                users.forEach(user -> System.out.println(user));
+                users.forEach(user -> System.out.println(user+ "\n"));
+            }
                 break;
-            case "insert":
-                Scanner scanner = new Scanner(System.in);
+            case "insert": {
                 System.out.println("---INSERISCI DATI---");
                 System.out.println("Username:");
                 String username = getInput();
@@ -65,6 +66,24 @@ public class UserView implements View {
                 System.out.println("Fax:");
                 String fax = getInput();
                 userService.insertUser(new User(username, password, firstname, lastname, dateofbirth, fiscalcode, businessname, vat, municipality, post, city, address, telephone, fax, "user"));
+            }
+                break;
+            case "remove": {
+                List<User> users = userService.getAllUsers();
+                System.out.println("-----UTENTI REGISTRATI-----");
+                System.out.println();
+                if(users.size()==1 && users.get(0).getRole().equals("admin"))
+                    System.out.println("Al momento non ci sono utenti da eliminare");
+                    else{
+                        for (User user : users) {
+                            if (user.getRole().equals("user"))
+                                System.out.println(user+ "\n");
+                        }
+                        System.out.println("Inserisci l'username dell'utente da rimuovere:");
+                        String username = getInput();
+                        userService.removeUser(username);
+                    }
+            }
         }
     }
 
@@ -78,7 +97,7 @@ public class UserView implements View {
     public void submit() {
         if (mode.equals("insert")) {
             MainDispatcher.getInstance().callView("Home", null);
-        }else if (mode.equals("all")) {
+        }else if (mode.equals("all")|| mode.equals("remove")) {
             Request request = new Request();
             request.put("role", role);
             request.put("nome", nome);

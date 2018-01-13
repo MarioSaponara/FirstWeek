@@ -8,7 +8,7 @@ public class CompatibilityController implements Controller{
     public void doControl(Request request) {
         int choice = (int) request.get("choice");
         switch (choice) {
-            case 9:
+            case 10:
                 request.put("mode", "insert");
                 break;
         }

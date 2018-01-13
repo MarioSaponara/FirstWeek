@@ -16,6 +16,9 @@ public class UserController implements Controller{
                 break;
             case 5:
                 request.put("mode", "all");
+                break;
+            case 6:
+                request.put("mode", "remove");
         }
 
         if (choice==1) {
